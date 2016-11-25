@@ -37,7 +37,14 @@
             <version>4.2</version>
         </dependency>
 
-      
+        <dependency>
+            <groupId>approval</groupId>
+            <artifactId>approval-test</artifactId>
+            <version>xxx</version>
+            <scope>system</scope>
+            <systemPath>${basedir}/libs/ApprovalTests.jar</systemPath>
+        </dependency>
+
 
     </dependencies>
 </project>
