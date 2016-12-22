@@ -1,0 +1,39 @@
+{
+	"labels": [
+		{
+			"id": "label0",
+			"label": "my_label",
+			"dimension": {
+				"w": 100,
+				"h": 100
+			}
+		}
+	],
+
+	"images": [
+		{
+			"id": "image0",
+			"path": "",
+			"dimension": {
+				"w": 100,
+				"h": 100
+			}
+		}
+	],
+
+	"boxes": [
+		{
+			"id": "box0",
+			"policy": "fr.flegac.experiments.ui.policies.DefaultBoxLayoutPolicy",
+			"components": [
+				"label0",
+				"image0"
+			],
+
+			"dimension": {
+				"w": 100,
+				"h": 100
+			}
+		}
+	]
+}
