@@ -1,0 +1,3 @@
+void lightAlgorithm(void) {
+
+}
