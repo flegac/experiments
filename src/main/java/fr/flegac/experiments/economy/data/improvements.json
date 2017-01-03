@@ -1,0 +1,11 @@
+{
+	"improvements": [
+		{
+			"id": "improvement0",
+			"production": "product0",
+			"lands": [
+				"land0"
+			]
+		}
+	]
+}

@@ -1,0 +1,26 @@
+{
+	"technologies": [
+		{
+			"id": "tech0",
+			"requires": [
+				
+			],
+
+			"allows": [
+				"improvement0",
+				"building0"
+			]
+		},
+
+		{
+			"id": "tech1",
+			"requires": [
+				"tech0"
+			],
+
+			"allows": [
+				"building1"
+			]
+		}
+	]
+}

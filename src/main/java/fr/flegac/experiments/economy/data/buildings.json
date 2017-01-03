@@ -1,0 +1,15 @@
+{
+	"buildings": [
+		{
+			"id": "building0",
+			"input": "product0",
+			"output": "product1"
+		},
+
+		{
+			"id": "building1",
+			"input": "product1",
+			"output": "product2"
+		}
+	]
+}
