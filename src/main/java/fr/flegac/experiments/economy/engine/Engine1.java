@@ -4,11 +4,13 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
 import com.google.gson.Gson;
 
-import fr.flegac.experiments.economy.model.Data;
+import fr.flegac.experiments.economy.model.DataModel;
 import fr.flegac.experiments.economy.model.production.Building;
 import fr.flegac.experiments.economy.model.production.EconomicEntity;
 import fr.flegac.experiments.economy.model.production.Improvement;
@@ -16,7 +18,7 @@ import fr.flegac.experiments.economy.model.production.Land;
 import fr.flegac.experiments.economy.model.production.Product;
 import fr.flegac.experiments.economy.model.production.Technology;
 
-public class EngineImpl implements Engine {
+public class Engine1 implements Engine {
     private static Gson gson = new Gson();
 
     private Map<String, EconomicEntity> entities = new HashMap<>();
@@ -25,7 +27,7 @@ public class EngineImpl implements Engine {
     public void load(File file) throws FileNotFoundException {
         if (file.isFile() && file.getName().endsWith(".json")) {
             System.out.println("load : " + file.getName());
-            Data data = gson.fromJson(new FileReader(file), Data.class);
+            DataModel data = gson.fromJson(new FileReader(file), DataModel.class);
 
             data.lands.forEach(this::register);
             data.improvements.forEach(this::register);
@@ -78,6 +80,46 @@ public class EngineImpl implements Engine {
         System.out.println("\t" + entity.id);
         entities.put(entity.id, entity);
 
+    }
+
+    @Override
+    public Set<String> getAll() {
+        return entities.keySet();
+    }
+
+    @Override
+    public Set<Building> buildings() {
+        Set<Building> result = new HashSet<>();
+        entities.values().stream().filter(item -> item instanceof Building).forEach(item -> result.add((Building) item));
+        return result;
+    }
+
+    @Override
+    public Set<Technology> technologies() {
+        Set<Technology> result = new HashSet<>();
+        entities.values().stream().filter(item -> item instanceof Technology).forEach(item -> result.add((Technology) item));
+        return result;
+    }
+
+    @Override
+    public Set<Product> products() {
+        Set<Product> result = new HashSet<>();
+        entities.values().stream().filter(item -> item instanceof Product).forEach(item -> result.add((Product) item));
+        return result;
+    }
+
+    @Override
+    public Set<Improvement> improvements() {
+        Set<Improvement> result = new HashSet<>();
+        entities.values().stream().filter(item -> item instanceof Improvement).forEach(item -> result.add((Improvement) item));
+        return result;
+    }
+
+    @Override
+    public Set<Land> lands() {
+        Set<Land> result = new HashSet<>();
+        entities.values().stream().filter(item -> item instanceof Land).forEach(item -> result.add((Land) item));
+        return result;
     }
 
 }

@@ -6,6 +6,14 @@
 			"lands": [
 				"land0"
 			]
+		},
+
+		{
+			"id": "improvement1",
+			"production": "product1",
+			"lands": [
+				"land1"
+			]
 		}
 	]
 }
