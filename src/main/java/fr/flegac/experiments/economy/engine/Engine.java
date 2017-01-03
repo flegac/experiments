@@ -2,6 +2,7 @@ package fr.flegac.experiments.economy.engine;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.Set;
 
 import fr.flegac.experiments.economy.model.production.Building;
 import fr.flegac.experiments.economy.model.production.EconomicEntity;
@@ -11,6 +12,19 @@ import fr.flegac.experiments.economy.model.production.Product;
 import fr.flegac.experiments.economy.model.production.Technology;
 
 public interface Engine {
+
+    Set<Building> buildings();
+
+    Set<Technology> technologies();
+
+    Set<Product> products();
+
+    Set<Improvement> improvements();
+
+    Set<Land> lands();
+
+    Set<String> getAll();
+
     EconomicEntity get(String id);
 
     Land land(String id);

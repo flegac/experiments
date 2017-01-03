@@ -19,6 +19,7 @@
 			],
 
 			"allows": [
+				"improvement1",
 				"building1"
 			]
 		}

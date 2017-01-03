@@ -9,7 +9,7 @@ import fr.flegac.experiments.economy.model.production.Land;
 import fr.flegac.experiments.economy.model.production.Product;
 import fr.flegac.experiments.economy.model.production.Technology;
 
-public class Data {
+public class DataModel {
     public List<Land> lands = new ArrayList<>();
 
     public List<Product> products = new ArrayList<>();
