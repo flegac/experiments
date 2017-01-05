@@ -5,10 +5,10 @@ import java.io.FileNotFoundException;
 
 import org.junit.Test;
 
-import fr.flegac.experiments.economy.engine.Engine;
-import fr.flegac.experiments.economy.engine.Engine1;
-import fr.flegac.experiments.economy.engine.nation.NationContext;
-import fr.flegac.experiments.economy.engine.nation.NationContext1;
+import fr.flegac.experiments.engine.economy.engine.Economy;
+import fr.flegac.experiments.engine.economy.engine.Economy1;
+import fr.flegac.experiments.engine.economy.engine.nation.NationContext;
+import fr.flegac.experiments.engine.economy.engine.nation.NationContext1;
 
 public class EngineShould {
 
@@ -16,7 +16,7 @@ public class EngineShould {
     public void loadData() throws FileNotFoundException {
         File file = new File("C:\\Users\\flegac\\git\\experiments\\src\\main\\java\\fr\\flegac\\experiments\\economy\\_data");
 
-        Engine engine = new Engine1();
+        Economy engine = new Economy1();
         engine.load(file);
 
         System.out.println("done");
