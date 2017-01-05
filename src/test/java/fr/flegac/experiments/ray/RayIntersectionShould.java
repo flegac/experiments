@@ -3,6 +3,9 @@ package fr.flegac.experiments.ray;
 import org.junit.Assert;
 import org.junit.Test;
 
+import fr.flegac.experiments.ray.vec.Vec;
+import fr.flegac.experiments.ray.vec.Vec1;
+
 public class RayIntersectionShould {
     @Test
     public void computeIntersection() {

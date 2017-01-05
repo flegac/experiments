@@ -1,5 +1,7 @@
 package fr.flegac.experiments.ray;
 
+import fr.flegac.experiments.ray.vec.Vec;
+
 public class Ray1 implements Ray {
 
     private Vec origin;

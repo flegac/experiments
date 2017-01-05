@@ -1,5 +1,8 @@
 package fr.flegac.experiments.ray;
 
+import fr.flegac.experiments.ray.vec.Vec;
+import fr.flegac.experiments.ray.vec.VecAPI;
+
 public class RayIntersection {
     private Vec O, A, B;
 
@@ -40,20 +43,14 @@ public class RayIntersection {
             A.copy().add(k[0], AB).add(1, O),
             A.copy().add(k[1], AB).add(1, O)
         };
-        // System.out.println("AB = " + AB);
-        // System.out.println("r = " + r);
-        // System.out.println(String.format("%05.5f %s", k[0], M[0]));
-        // System.out.println(String.format("%05.5f %s", k[1], M[1]));
         return VecAPI.dist(A, M[0]) < VecAPI.dist(A, M[1]) ? M[0] : M[1];
     }
 
     private static double[] solve(double a, double b, double c) {
-
-        // solve quadratic equation
         double delta = b * b - 4 * a * c;
 
         if (delta < 0) {
-            throw new RuntimeException("no intersection");
+            throw new RuntimeException("no real solution");
         }
 
         if (delta == 0) {

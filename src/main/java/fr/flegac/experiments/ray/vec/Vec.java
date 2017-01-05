@@ -1,4 +1,4 @@
-package fr.flegac.experiments.ray;
+package fr.flegac.experiments.ray.vec;
 
 public interface Vec {
     float x();

@@ -1,5 +1,7 @@
 package fr.flegac.experiments.ray;
 
+import fr.flegac.experiments.ray.vec.Vec;
+
 public class Sphere1 implements Sphere {
 
     private Vec center;
