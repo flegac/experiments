@@ -7,6 +7,7 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import fr.flegac.experiments.delaunay.VecArray.Vec;
+import fr.flegac.experiments.delaunay.v2.TriangleUtils;
 
 public class TriangleUtilsShould {
     private static Random rand = new Random();

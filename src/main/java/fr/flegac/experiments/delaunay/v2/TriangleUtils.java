@@ -1,6 +1,6 @@
-package fr.flegac.experiments.delaunay;
+package fr.flegac.experiments.delaunay.v2;
 
-import fr.flegac.experiments.delaunay.VecArray.Vec;
+import fr.flegac.experiments.delaunay.v2.PointCloud.Vec;
 
 public class TriangleUtils {
 

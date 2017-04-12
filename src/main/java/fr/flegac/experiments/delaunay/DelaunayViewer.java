@@ -2,6 +2,8 @@ package fr.flegac.experiments.delaunay;
 
 import java.util.Random;
 
+import fr.flegac.experiments.delaunay.v2.Delaunay;
+import fr.flegac.experiments.delaunay.v2.Edge;
 import javafx.application.Application;
 import javafx.scene.Group;
 import javafx.scene.Scene;
