@@ -38,16 +38,16 @@ public class DelaunayViewer extends Application {
         edges.setScaleX(scale);
         edges.setScaleY(scale);
         for (Edge edge : delaunay.edges()) {
-            Vec a = delaunay.get(edge.origin);
-            Vec b = delaunay.get(edge.inner.origin);
+            Vec a = edge.origin;
+            Vec b = edge.inner.origin;
             Line line = new Line(a.x(), -a.y(), b.x(), -b.y());
             line.setStrokeType(StrokeType.OUTSIDE);
             line.setStroke(Color.BLUE);
             line.setStrokeWidth(.001);
             edges.getChildren().add(line);
 
-            show(delaunay.get(edge.origin), edges);
-            // show(points.get(edge.origin), edges);
+            show(edge.origin, edges);
+            // show(points.get(edge.origin.index), edges);
 
         }
         root.getChildren().add(edges);

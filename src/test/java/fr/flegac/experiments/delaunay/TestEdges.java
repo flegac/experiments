@@ -9,10 +9,10 @@ public class TestEdges {
     public static void main(String[] args) {
         PointCloud points = new ArrayPointCloud(12);
 
-        Edge t0 = EdgeFactory.triangle(0, 3);
-        Edge t1 = EdgeFactory.triangle(3, 6);
-        Edge t2 = EdgeFactory.triangle(6, 9);
-        Edge t3 = EdgeFactory.triangle(9, 12);
+        Edge t0 = EdgeFactory.triangle(points, 0, 3);
+        Edge t1 = EdgeFactory.triangle(points, 3, 6);
+        Edge t2 = EdgeFactory.triangle(points, 6, 9);
+        Edge t3 = EdgeFactory.triangle(points, 9, 12);
 
         t0.showOuterBox();
         System.out.println("-----------");

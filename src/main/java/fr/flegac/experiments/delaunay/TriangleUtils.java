@@ -45,6 +45,14 @@ public class TriangleUtils {
         return det3(a, b, c, d, e, f, g, h, i) > 0;
     }
 
+    public static boolean goodTriangle(Vec a, Vec b, Vec c) {
+        float x1 = b.x() - a.x();
+        float y1 = b.y() - a.y();
+        float x2 = c.x() - a.x();
+        float y2 = c.y() - a.y();
+        return x1 * y2 - x2 * y1 >= 0;
+    }
+
     private static float det3(float a, float b, float c,
         float d, float e, float f,
         float g, float h, float i) {

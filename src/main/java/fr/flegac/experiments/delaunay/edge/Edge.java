@@ -1,7 +1,9 @@
 package fr.flegac.experiments.delaunay.edge;
 
+import fr.flegac.experiments.delaunay.point.PointCloud.Vec;
+
 public class Edge {
-    public int origin;
+    public Vec origin;
 
     public Edge inner;
 
@@ -9,7 +11,7 @@ public class Edge {
 
     public Edge right;
 
-    Edge(int origin) {
+    Edge(Vec origin) {
         this.origin = origin;
     }
 
