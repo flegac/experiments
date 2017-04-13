@@ -26,9 +26,9 @@ public class DelaunayViewer extends Application {
     @Override
     public void start(final Stage primaryStage) {
 
-        ArrayPointCloud points = new ArrayPointCloud(10);
+        ArrayPointCloud points = new ArrayPointCloud(20);
+
         Delaunay delaunay = new Delaunay(points);
-        delaunay.triangulate();
 
         Group root = new Group();
 
@@ -39,8 +39,8 @@ public class DelaunayViewer extends Application {
         edges.setScaleX(scale);
         edges.setScaleY(scale);
         for (Edge edge : delaunay.edges()) {
-            Vec a = delaunay.get(edge.origin);
-            Vec b = delaunay.get(edge.inner.origin);
+            Vec a = points.get(edge.origin);
+            Vec b = points.get(edge.inner.origin);
             Line line = new Line(a.x(), a.y(), b.x(), b.y());
             line.setStrokeType(StrokeType.OUTSIDE);
             line.setStroke(Color.BLUE);

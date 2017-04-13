@@ -27,9 +27,9 @@ public class Triangulation {
 
     public static Triangulation merge(Triangulation left, Triangulation right) {
         // merge
-        Edge newEdge = computeNewEdge(left, right);
 
-        left.edges.add(newEdge);
+        Edge l = left.bottom;
+        Edge r = right.bottom;
 
         // update data
         left.edges.addAll(right.edges);
@@ -37,38 +37,18 @@ public class Triangulation {
         return left;
     }
 
-    private static Edge computeNewEdge(Triangulation left, Triangulation right) {
-        Edge l = left.rightBottom(left.bottom);
-        Edge r = right.leftBottom(right.bottom);
-        Edge newEdge = EdgeFactory.biEdge(l.origin, r.origin);
-        return newEdge;
+    private Edge rightBottom(Edge edge) {
+
+        return null;
     }
 
     private Edge leftBottom(Edge edge) {
-        Edge left = edge.left;
-
-        Vec a = points.get(edge.origin);
-        Vec b = points.get(left.origin);
-
-        if (TriangleUtils.yxCompare(a, b) < 0) {
-            return edge;
-        }
-
-        return leftBottom(left);
-
+        return null;
     }
 
-    private Edge rightBottom(Edge edge) {
-        Edge right = edge.right;
-
-        Vec a = points.get(edge.origin);
+    private Edge min(Edge left, Edge right) {
+        Vec a = points.get(left.origin);
         Vec b = points.get(right.origin);
-
-        if (TriangleUtils.yxCompare(a, b) < 0) {
-            return edge;
-        }
-
-        return rightBottom(right);
+        return TriangleUtils.yxCompare(a, b) <= 0 ? left : right;
     }
-
 }

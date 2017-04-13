@@ -5,6 +5,7 @@ import java.util.Set;
 import fr.flegac.experiments.delaunay.v2.edge.Edge;
 import fr.flegac.experiments.delaunay.v2.point.PointCloud;
 import fr.flegac.experiments.delaunay.v2.point.PointCloud.Vec;
+//github.com/flegac/experiments.git
 import fr.flegac.experiments.delaunay.v2.point.SortedPointCloud;
 import fr.flegac.experiments.delaunay.v2.triangulation.Triangulation;
 
@@ -14,7 +15,7 @@ public class Delaunay {
     private Triangulation triangulation;
 
     public Set<Edge> edges() {
-        return triangulation.edges;
+        return null;
     }
 
     public Vec get(int index) {
@@ -23,7 +24,7 @@ public class Delaunay {
 
     public Delaunay(PointCloud points) {
         this.points = new SortedPointCloud(points);
-        this.points.sort(TriangleUtils::xCompare);
+        this.points.sort(TriangleUtils::xyCompare);
     }
 
     public Triangulation result() {
