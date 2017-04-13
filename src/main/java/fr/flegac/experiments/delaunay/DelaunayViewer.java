@@ -1,9 +1,9 @@
 package fr.flegac.experiments.delaunay;
 
-import java.util.Random;
-
 import fr.flegac.experiments.delaunay.v2.Delaunay;
-import fr.flegac.experiments.delaunay.v2.Edge;
+import fr.flegac.experiments.delaunay.v2.edge.Edge;
+import fr.flegac.experiments.delaunay.v2.point.ArrayPointCloud;
+import fr.flegac.experiments.delaunay.v2.point.PointCloud.Vec;
 import javafx.application.Application;
 import javafx.scene.Group;
 import javafx.scene.Scene;
@@ -11,41 +11,45 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.StrokeType;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 public class DelaunayViewer extends Application {
-    private static Random rand = new Random(54);
-
     public static void main(final String[] args) {
         launch(args);
     }
 
-    private static float scale = 1;
+    private static float scale = 400;
 
     @Override
     public void start(final Stage primaryStage) {
-        int N = 100;
-        float[] x = new float[N];
-        float[] y = new float[N];
 
-        for (int i = 0; i < N; i++) {
-            x[i] = rand.nextFloat() * 100;
-            y[i] = rand.nextFloat() * 100;
-        }
-
-        Delaunay delaunay = new Delaunay(x, y);
+        ArrayPointCloud points = new ArrayPointCloud(10);
+        Delaunay delaunay = new Delaunay(points);
+        delaunay.triangulate();
 
         Group root = new Group();
 
+        root.setTranslateX(-150);
+        root.setTranslateY(-150);
+
         Group edges = new Group();
-        edges.setScaleX(1);
-        edges.setScaleY(1);
+        edges.setScaleX(scale);
+        edges.setScaleY(scale);
         for (Edge edge : delaunay.edges()) {
-            Line line = new Line(edge.start().x(), edge.start().y(), edge.end().x(), edge.end().y());
+            Vec a = delaunay.get(edge.origin);
+            Vec b = delaunay.get(edge.inner.origin);
+            Line line = new Line(a.x(), a.y(), b.x(), b.y());
             line.setStrokeType(StrokeType.OUTSIDE);
             line.setStroke(Color.BLUE);
-            line.setStrokeWidth(.1);
+            line.setStrokeWidth(.001);
             edges.getChildren().add(line);
+
+            show(delaunay.get(edge.origin), edges);
+            // show(points.get(edge.origin), edges);
+
         }
         root.getChildren().add(edges);
 
@@ -64,6 +68,15 @@ public class DelaunayViewer extends Application {
         primaryStage.setTitle("Tiling viewer");
         primaryStage.show();
 
+    }
+
+    private void show(Vec a, Group edges) {
+        Text ta = new Text(a.x(), a.y(), "" + a.index);
+        ta.setFont(Font.font(null, FontWeight.NORMAL, .1));
+        ta.setStroke(Color.BLACK);
+        ta.setFill(Color.BLACK);
+        ta.setStrokeWidth(.01);
+        edges.getChildren().add(ta);
     }
 
 }

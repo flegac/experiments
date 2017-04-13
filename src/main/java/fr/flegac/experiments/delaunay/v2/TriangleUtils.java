@@ -1,11 +1,25 @@
 package fr.flegac.experiments.delaunay.v2;
 
-import fr.flegac.experiments.delaunay.v2.PointCloud.Vec;
+import fr.flegac.experiments.delaunay.v2.point.PointCloud.Vec;
 
 public class TriangleUtils {
 
-    private static float sign(Vec a, Vec b, Vec c) {
-        return (a.x() - c.x()) * (b.y() - c.y()) - (b.x() - c.x()) * (a.y() - c.y());
+    public static int xyCompare(Vec a, Vec b) {
+        int x = xCompare(a, b);
+        return x != 0 ? x : yCompare(a, b);
+    }
+
+    public static int yxCompare(Vec a, Vec b) {
+        int y = yCompare(a, b);
+        return y != 0 ? y : xCompare(a, b);
+    }
+
+    public static int xCompare(Vec a, Vec b) {
+        return (int) Math.signum(a.x() - b.x());
+    }
+
+    public static int yCompare(Vec a, Vec b) {
+        return (int) Math.signum(a.y() - b.y());
     }
 
     public static boolean inTriangle(Vec x, Vec a, Vec b, Vec c) {
@@ -41,4 +55,7 @@ public class TriangleUtils {
         return a * d - b * c;
     }
 
+    private static float sign(Vec a, Vec b, Vec c) {
+        return (a.x() - c.x()) * (b.y() - c.y()) - (b.x() - c.x()) * (a.y() - c.y());
+    }
 }
