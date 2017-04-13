@@ -1,4 +1,4 @@
-package fr.flegac.experiments.delaunay.v2.edge;
+package fr.flegac.experiments.delaunay.edge;
 
 public class Edge {
     public int origin;

@@ -1,13 +1,13 @@
-package fr.flegac.experiments.delaunay.v2.triangulation;
+package fr.flegac.experiments.delaunay.triangulation;
 
 import java.util.HashSet;
 import java.util.Set;
 
-import fr.flegac.experiments.delaunay.v2.TriangleUtils;
-import fr.flegac.experiments.delaunay.v2.edge.Edge;
-import fr.flegac.experiments.delaunay.v2.edge.EdgeFactory;
-import fr.flegac.experiments.delaunay.v2.point.PointCloud;
-import fr.flegac.experiments.delaunay.v2.point.PointCloud.Vec;
+import fr.flegac.experiments.delaunay.TriangleUtils;
+import fr.flegac.experiments.delaunay.edge.Edge;
+import fr.flegac.experiments.delaunay.edge.EdgeFactory;
+import fr.flegac.experiments.delaunay.point.PointCloud;
+import fr.flegac.experiments.delaunay.point.PointCloud.Vec;
 
 public class Triangulation {
     private PointCloud points;
@@ -26,17 +26,46 @@ public class Triangulation {
     }
 
     public static Triangulation merge(Triangulation left, Triangulation right) {
+        PointCloud _points = left.points;
+
         // merge
+        Set<Edge> edges = new HashSet<>();
+
         Edge l = left.rightBottom(left.bottom);
         Edge r = right.leftBottom(right.bottom);
-        Edge newEdge = EdgeFactory.biEdge(l.origin, r.origin);
 
-        left.edges.add(newEdge);
+        Edge edge = bridge(l, r);
+        edges.add(edge);
+
+        boolean nextLeft = TriangleUtils.yCompare(_points.get(l.origin), _points.get(r.origin)) <= 0;
+        if (nextLeft) {
+            l = l.right;
+        }
+        else {
+            r = r.left;
+        }
 
         // update data
+        left.edges.addAll(edges);
         left.edges.addAll(right.edges);
-        left.bottom = left.leftBottom(left.bottom);
+        left.bottom = TriangleUtils.yxCompare(
+            _points.get(left.bottom.origin),
+            _points.get(right.bottom.origin)) <= 0
+                ? left.bottom
+                : right.bottom;
+
+        // left.leftBottom(left.bottom);
+
         return left;
+    }
+
+    private static Edge bridge(Edge l, Edge r) {
+        Edge edge = EdgeFactory.biEdge(l.origin, r.origin);
+
+        l.right.left = edge.left;
+        l.right = edge;
+
+        return edge;
     }
 
     private Edge leftBottom(Edge edge) {

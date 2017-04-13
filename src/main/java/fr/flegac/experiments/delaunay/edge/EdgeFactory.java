@@ -1,6 +1,6 @@
-package fr.flegac.experiments.delaunay.v2.edge;
+package fr.flegac.experiments.delaunay.edge;
 
-import fr.flegac.experiments.delaunay.v2.point.PointCloud.Vec;
+import fr.flegac.experiments.delaunay.point.PointCloud.Vec;
 
 public class EdgeFactory {
 

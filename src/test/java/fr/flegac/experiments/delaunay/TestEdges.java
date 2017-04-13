@@ -1,9 +1,9 @@
 package fr.flegac.experiments.delaunay;
 
-import fr.flegac.experiments.delaunay.v2.edge.Edge;
-import fr.flegac.experiments.delaunay.v2.edge.EdgeFactory;
-import fr.flegac.experiments.delaunay.v2.point.ArrayPointCloud;
-import fr.flegac.experiments.delaunay.v2.point.PointCloud;
+import fr.flegac.experiments.delaunay.edge.Edge;
+import fr.flegac.experiments.delaunay.edge.EdgeFactory;
+import fr.flegac.experiments.delaunay.point.ArrayPointCloud;
+import fr.flegac.experiments.delaunay.point.PointCloud;
 
 public class TestEdges {
     public static void main(String[] args) {

@@ -1,13 +1,12 @@
-package fr.flegac.experiments.delaunay.v2;
+package fr.flegac.experiments.delaunay;
 
 import java.util.Set;
 
-import fr.flegac.experiments.delaunay.v2.edge.Edge;
-import fr.flegac.experiments.delaunay.v2.point.PointCloud;
-import fr.flegac.experiments.delaunay.v2.point.PointCloud.Vec;
-//github.com/flegac/experiments.git
-import fr.flegac.experiments.delaunay.v2.point.SortedPointCloud;
-import fr.flegac.experiments.delaunay.v2.triangulation.Triangulation;
+import fr.flegac.experiments.delaunay.edge.Edge;
+import fr.flegac.experiments.delaunay.point.PointCloud;
+import fr.flegac.experiments.delaunay.point.SortedPointCloud;
+import fr.flegac.experiments.delaunay.point.PointCloud.Vec;
+import fr.flegac.experiments.delaunay.triangulation.Triangulation;
 
 public class Delaunay {
     private SortedPointCloud points;

@@ -1,4 +1,4 @@
-package fr.flegac.experiments.delaunay.v2.point;
+package fr.flegac.experiments.delaunay.point;
 
 public abstract class PointCloud {
     protected abstract float x(int index);

@@ -1,9 +1,8 @@
 package fr.flegac.experiments.delaunay;
 
-import fr.flegac.experiments.delaunay.v2.Delaunay;
-import fr.flegac.experiments.delaunay.v2.edge.Edge;
-import fr.flegac.experiments.delaunay.v2.point.ArrayPointCloud;
-import fr.flegac.experiments.delaunay.v2.point.PointCloud.Vec;
+import fr.flegac.experiments.delaunay.edge.Edge;
+import fr.flegac.experiments.delaunay.point.ArrayPointCloud;
+import fr.flegac.experiments.delaunay.point.PointCloud.Vec;
 import javafx.application.Application;
 import javafx.scene.Group;
 import javafx.scene.Scene;
@@ -41,13 +40,13 @@ public class DelaunayViewer extends Application {
         for (Edge edge : delaunay.edges()) {
             Vec a = delaunay.get(edge.origin);
             Vec b = delaunay.get(edge.inner.origin);
-            Line line = new Line(a.x(), a.y(), b.x(), b.y());
+            Line line = new Line(a.x(), -a.y(), b.x(), -b.y());
             line.setStrokeType(StrokeType.OUTSIDE);
             line.setStroke(Color.BLUE);
             line.setStrokeWidth(.001);
             edges.getChildren().add(line);
 
-             show(delaunay.get(edge.origin), edges);
+            show(delaunay.get(edge.origin), edges);
             // show(points.get(edge.origin), edges);
 
         }
@@ -71,7 +70,7 @@ public class DelaunayViewer extends Application {
     }
 
     private void show(Vec a, Group edges) {
-        Text ta = new Text(a.x(), a.y(), "" + a.index);
+        Text ta = new Text(a.x(), -a.y(), "" + a.index);
         ta.setFont(Font.font(null, FontWeight.NORMAL, .1));
         ta.setStroke(Color.BLACK);
         ta.setFill(Color.BLACK);
