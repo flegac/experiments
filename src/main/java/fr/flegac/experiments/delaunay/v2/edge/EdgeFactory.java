@@ -12,12 +12,12 @@ public class EdgeFactory {
         return triangle(start, start + 1, start + 2);
     }
 
-    private static Edge biEdge(int p0, int p1) {
+    public static Edge biEdge(int p0, int p1) {
         Edge e0 = new Edge(p0);
         Edge e1 = new Edge(p1);
 
-        e0.inner = e0.outer = e1;
-        e1.inner = e1.outer = e0;
+        e0.inner = e0.left = e0.right = e1;
+        e1.inner = e1.left = e1.right = e0;
         return e0;
     }
 
@@ -27,12 +27,16 @@ public class EdgeFactory {
         Edge e2 = new Edge(p2);
 
         e0.inner = e1;
-        e1.inner = e2;
-        e2.inner = e0;
+        e0.left = e2;
+        e0.right = e1;
 
-        e2.outer = e1;
-        e1.outer = e0;
-        e0.outer = e2;
+        e1.inner = e2;
+        e1.left = e0;
+        e1.right = e2;
+
+        e2.inner = e0;
+        e2.left = e1;
+        e2.right = e0;
 
         return e0;
     }
@@ -40,12 +44,12 @@ public class EdgeFactory {
     public static Edge merge(Edge left, Edge right) {
         assert (left.origin == right.origin);
 
-        assert (left.inner.origin == right.outer.origin);
-        assert (right.origin == left.inner.outer.origin);
+        assert (left.inner.origin == right.left.origin);
+        assert (right.origin == left.inner.left.origin);
 
-        Edge tmp = left.inner.outer;
-        left.inner.outer = right.outer;
-        right.outer = tmp;
+        Edge tmp = left.inner.left;
+        left.inner.left = right.left;
+        right.left = tmp;
 
         return left.origin <= right.origin ? left : right;
     }

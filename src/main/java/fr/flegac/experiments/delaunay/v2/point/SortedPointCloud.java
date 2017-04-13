@@ -33,7 +33,7 @@ public class SortedPointCloud extends PointCloud {
     }
 
     public void sort(Comparator<Vec> comparator) {
-        Arrays.sort(permutation, (Integer a, Integer b) -> comparator.compare(get(a), get(b)));
+        Arrays.sort(permutation, (Integer a, Integer b) -> comparator.compare(delegate.get(a), delegate.get(b)));
     }
 
 }

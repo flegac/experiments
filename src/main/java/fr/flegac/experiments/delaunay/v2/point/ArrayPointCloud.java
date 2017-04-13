@@ -3,7 +3,7 @@ package fr.flegac.experiments.delaunay.v2.point;
 import java.util.Random;
 
 public class ArrayPointCloud extends PointCloud {
-    private static Random rand = new Random();
+    private static Random rand = new Random(54);
 
     private float[] x;
 

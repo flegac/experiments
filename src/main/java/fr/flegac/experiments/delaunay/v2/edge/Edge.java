@@ -5,7 +5,9 @@ public class Edge {
 
     public Edge inner;
 
-    public Edge outer;
+    public Edge left;
+
+    public Edge right;
 
     Edge(int origin) {
         this.origin = origin;
@@ -13,26 +15,16 @@ public class Edge {
 
     public void showOuterBox() {
         System.out.println(this);
-        Edge x = outer;
+        Edge x = left;
         while (x != this) {
             System.out.println(x);
-            x = x.outer;
-        }
-
-    }
-
-    public void showInnerBox() {
-        System.out.println(this);
-        Edge x = inner;
-        while (x != this) {
-            System.out.println(x);
-            x = x.inner;
+            x = x.left;
         }
     }
 
     @Override
     public String toString() {
-        return String.format("(%s : %s %s)", origin, inner.origin, outer.origin);
+        return String.format("(%s : %s %s)", origin, inner.origin, left.origin);
     }
 
 }

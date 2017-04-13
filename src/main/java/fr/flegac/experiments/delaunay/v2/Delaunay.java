@@ -15,7 +15,7 @@ public class Delaunay {
     private Triangulation triangulation;
 
     public Set<Edge> edges() {
-        return null;
+        return triangulation.edges;
     }
 
     public Vec get(int index) {
