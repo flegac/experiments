@@ -21,7 +21,7 @@ public class EdgeFactory {
         return e0;
     }
 
-    private static Edge triangle(int p0, int p1, int p2) {
+    public static Edge triangle(int p0, int p1, int p2) {
         Edge e0 = new Edge(p0);
         Edge e1 = new Edge(p1);
         Edge e2 = new Edge(p2);

@@ -6,6 +6,7 @@ import java.util.Set;
 import fr.flegac.experiments.delaunay.TriangleUtils;
 import fr.flegac.experiments.delaunay.edge.Edge;
 import fr.flegac.experiments.delaunay.edge.EdgeFactory;
+import fr.flegac.experiments.delaunay.edge.EdgeUtil;
 import fr.flegac.experiments.delaunay.point.PointCloud;
 import fr.flegac.experiments.delaunay.point.PointCloud.Vec;
 
@@ -34,16 +35,41 @@ public class Triangulation {
         Edge l = left.rightBottom(left.bottom);
         Edge r = right.leftBottom(right.bottom);
 
-        Edge edge = bridge(l, r);
-        edges.add(edge);
+        do {
+            if (EdgeUtil.isLast(_points, l) && EdgeUtil.isLast(_points, r)) {
+                break;
+            }
 
-        boolean nextLeft = TriangleUtils.yCompare(_points.get(l.origin), _points.get(r.origin)) <= 0;
-        if (nextLeft) {
-            l = l.right;
+            int a = l.origin;
+            int b = r.origin;
+            int c;
+
+            if (EdgeUtil.isLast(_points, l)) {
+                r = r.left;
+                c = r.origin;
+            }
+            else if (EdgeUtil.isLast(_points, r)) {
+                l = l.right;
+                c = l.origin;
+            }
+            else {
+                if (TriangleUtils.yCompare(_points.get(l.origin), _points.get(r.origin)) <= 0) {
+                    l = l.right;
+                    c = l.origin;
+                }
+                else {
+                    r = r.left;
+                    c = r.origin;
+                }
+            }
+
+            Edge triangle = EdgeFactory.triangle(a, b, c);
+
+            edges.add(triangle);
+            edges.add(triangle.left);
+            edges.add(triangle.right);
         }
-        else {
-            r = r.left;
-        }
+        while (true);
 
         // update data
         left.edges.addAll(edges);
@@ -59,13 +85,20 @@ public class Triangulation {
         return left;
     }
 
-    private static Edge bridge(Edge l, Edge r) {
-        Edge edge = EdgeFactory.biEdge(l.origin, r.origin);
+    private static Edge next(PointCloud _points, Edge l, Edge r) {
+        int a = l.origin;
+        int b = r.origin;
+        int c;
 
-        l.right.left = edge.left;
-        l.right = edge;
-
-        return edge;
+        if (TriangleUtils.yCompare(_points.get(l.origin), _points.get(r.origin)) <= 0) {
+            l = l.right;
+            c = l.origin;
+        }
+        else {
+            r = r.left;
+            c = r.origin;
+        }
+        return EdgeFactory.triangle(a, b, c);
     }
 
     private Edge leftBottom(Edge edge) {
