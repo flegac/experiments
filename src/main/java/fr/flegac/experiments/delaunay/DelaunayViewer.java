@@ -3,7 +3,9 @@ package fr.flegac.experiments.delaunay;
 import java.util.Random;
 
 import fr.flegac.experiments.delaunay.v2.Delaunay;
-import fr.flegac.experiments.delaunay.v2.Edge;
+import fr.flegac.experiments.delaunay.v2.edge.Edge;
+import fr.flegac.experiments.delaunay.v2.point.ArrayPointCloud;
+import fr.flegac.experiments.delaunay.v2.point.PointCloud.Vec;
 import javafx.application.Application;
 import javafx.scene.Group;
 import javafx.scene.Scene;
@@ -24,16 +26,10 @@ public class DelaunayViewer extends Application {
 
     @Override
     public void start(final Stage primaryStage) {
-        int N = 100;
-        float[] x = new float[N];
-        float[] y = new float[N];
 
-        for (int i = 0; i < N; i++) {
-            x[i] = rand.nextFloat() * 100;
-            y[i] = rand.nextFloat() * 100;
-        }
+        ArrayPointCloud points = new ArrayPointCloud(20);
 
-        Delaunay delaunay = new Delaunay(x, y);
+        Delaunay delaunay = new Delaunay(points);
 
         Group root = new Group();
 
@@ -41,7 +37,9 @@ public class DelaunayViewer extends Application {
         edges.setScaleX(1);
         edges.setScaleY(1);
         for (Edge edge : delaunay.edges()) {
-            Line line = new Line(edge.start().x(), edge.start().y(), edge.end().x(), edge.end().y());
+            Vec a = points.get(edge.origin);
+            Vec b = points.get(edge.inner.origin);
+            Line line = new Line(a.x(), a.y(), b.x(), b.y());
             line.setStrokeType(StrokeType.OUTSIDE);
             line.setStroke(Color.BLUE);
             line.setStrokeWidth(.1);

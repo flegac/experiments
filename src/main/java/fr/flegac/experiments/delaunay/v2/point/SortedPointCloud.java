@@ -1,4 +1,4 @@
-package fr.flegac.experiments.delaunay.v2;
+package fr.flegac.experiments.delaunay.v2.point;
 
 import java.util.Arrays;
 import java.util.Comparator;

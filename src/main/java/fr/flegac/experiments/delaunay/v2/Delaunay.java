@@ -1,19 +1,24 @@
 package fr.flegac.experiments.delaunay.v2;
 
+import java.util.Set;
+
+import fr.flegac.experiments.delaunay.v2.edge.Edge;
+import fr.flegac.experiments.delaunay.v2.point.PointCloud;
+import fr.flegac.experiments.delaunay.v2.point.SortedPointCloud;
+import fr.flegac.experiments.delaunay.v2.triangulation.Triangulation;
+
 public class Delaunay {
     private SortedPointCloud points;
 
     private Triangulation triangulation;
 
+    public Set<Edge> edges() {
+        return null;
+    }
+
     public Delaunay(PointCloud points) {
         this.points = new SortedPointCloud(points);
-        this.points.sort((a, b) -> {
-            int x = (int) Math.signum(a.x() - b.x());
-            if (x != 0) {
-                return x;
-            }
-            return (int) Math.signum(a.y() - b.y());
-        });
+        this.points.sort(TriangleUtils::xyCompare);
     }
 
     public Triangulation result() {
@@ -24,13 +29,15 @@ public class Delaunay {
         triangulation = triangulate(0, points.size());
     }
 
-    private Triangulation triangulate(int indexStart, int indexEnd) {
-        if (indexEnd - indexStart > 3) {
-            int middle = indexStart + (indexEnd - indexStart) / 2;
-            return Triangulation.merge(triangulate(indexStart, middle), triangulate(middle, indexEnd));
+    private Triangulation triangulate(int start, int end) {
+        if (end - start <= 3) {
+            return new Triangulation(points, start, end);
         }
 
-        return new Triangulation(points, indexStart, indexEnd);
+        int middle = start + (end - start) / 2;
+        Triangulation left = triangulate(start, middle);
+        Triangulation right = triangulate(middle, end);
+        return Triangulation.merge(left, right);
     }
 
 }

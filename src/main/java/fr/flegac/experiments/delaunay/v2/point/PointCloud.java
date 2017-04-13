@@ -1,4 +1,4 @@
-package fr.flegac.experiments.delaunay.v2;
+package fr.flegac.experiments.delaunay.v2.point;
 
 public abstract class PointCloud {
     protected abstract float x(int index);
@@ -12,7 +12,7 @@ public abstract class PointCloud {
     }
 
     public class Vec {
-        int index;
+        public final int index;
 
         public Vec(int index) {
             super();
