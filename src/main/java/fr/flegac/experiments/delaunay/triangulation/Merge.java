@@ -17,7 +17,7 @@ public class Merge {
 
     private Set<Edge> newEdges = new HashSet<>();
 
-    private List<Link> links = new LinkedList<>();
+    private List<MergeLink> links = new LinkedList<>();
 
     private Edge l;
 
@@ -44,19 +44,15 @@ public class Merge {
     }
 
     public Triangulation merge() {
-
         System.out.println("l = " + left.bottom.outerBox());
         System.out.println("r = " + right.bottom.outerBox());
 
         computeLinks();
-
         links.forEach(l -> System.out.print(l));
         System.out.println();
 
         patchWithLinks();
-
         updateTriangulation();
-
         System.out.println("-> " + left.bottom.outerBox());
 
         return left;
@@ -78,18 +74,18 @@ public class Merge {
                 break;
             }
 
-            Link link = new Link(l, r);
+            MergeLink link = new MergeLink(l, r);
             links.add(link);
             l = link.nextLeft();
             r = link.nextRight();
         }
         while (true);
-        links.add(new Link(l, r));
+        links.add(new MergeLink(l, r));
     }
 
     private void patchWithLinks() {
         int index = 0;
-        for (Link link : links) {
+        for (MergeLink link : links) {
             Edge edge = EdgeFactory.biEdge(link.left.origin, link.right.origin);
             newEdges.add(edge);
             if (index == 0) {
@@ -107,55 +103,6 @@ public class Merge {
 
             index++;
         }
-    }
-
-    static class Link {
-        Edge left;
-
-        Edge right;
-
-        boolean leftSide;
-
-        Link(Edge left, Edge right) {
-            super();
-            this.left = left;
-            this.right = right;
-
-            boolean lastL = EdgeUtil.isLast(left);
-            boolean lastR = EdgeUtil.isLast(right);
-
-            if (lastR) {
-                leftSide = true;
-            }
-            else if (lastL) {
-                leftSide = false;
-            }
-            else {
-                boolean leftOk = TriangleUtils.goodTriangle(left.origin, right.origin, left.right.origin);
-                boolean rightOk = TriangleUtils.goodTriangle(left.origin, right.origin, right.left.origin);
-                if (leftOk && rightOk) {
-                    leftSide = (TriangleUtils.yCompare(left.right.origin, right.left.origin) <= 0);
-                }
-                else {
-                    leftSide = leftOk;
-                }
-            }
-
-        }
-
-        Edge nextLeft() {
-            return leftSide ? left.right : left;
-        }
-
-        Edge nextRight() {
-            return leftSide ? right : right.left;
-        }
-
-        @Override
-        public String toString() {
-            return String.format("link(%s %s)", left.origin, right.origin);
-        }
-
     }
 
 }
