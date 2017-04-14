@@ -131,7 +131,14 @@ public class Merge {
                 leftSide = false;
             }
             else {
-                leftSide = (TriangleUtils.yCompare(left.origin, right.origin) <= 0);
+                boolean leftOk = TriangleUtils.goodTriangle(left.origin, right.origin, left.right.origin);
+                boolean rightOk = TriangleUtils.goodTriangle(left.origin, right.origin, right.left.origin);
+                if (leftOk && rightOk) {
+                    leftSide = (TriangleUtils.yCompare(left.right.origin, right.left.origin) <= 0);
+                }
+                else {
+                    leftSide = leftOk;
+                }
             }
 
         }

@@ -46,7 +46,7 @@ public class DelaunayViewer extends Application {
             line.setStrokeWidth(.001);
             edges.getChildren().add(line);
 
-            show(edge.origin, edges);
+            // show(edge.origin, edges);
             // show(points.get(edge.origin.index), edges);
 
         }
