@@ -75,7 +75,7 @@ public class Merge {
             }
 
             MergeLink link = new MergeLink(l, r);
-            if (link.lCandidate == null && link.rCandidate == null) {
+            if (link.selected == null) {
                 break;
             }
 

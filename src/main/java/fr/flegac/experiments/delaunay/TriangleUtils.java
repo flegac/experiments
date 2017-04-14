@@ -29,7 +29,7 @@ public class TriangleUtils {
         return b1 == b2 && b2 == b3;
     }
 
-    public static boolean inCircle(Vec D, Vec A, Vec B, Vec C) {
+    public static boolean inCircle(Vec A, Vec B, Vec C, Vec D) {
         float a = A.x() - D.x();
         float b = A.y() - D.y();
         float c = A.x() * A.x() - D.x() * D.x() + A.y() * A.y() - D.y() * D.y();

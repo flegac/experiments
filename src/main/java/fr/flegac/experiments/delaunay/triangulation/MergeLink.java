@@ -9,29 +9,30 @@ class MergeLink {
 
     Edge lCandidate, rCandidate;
 
+    Edge selected;
+
     MergeLink(Edge left, Edge right) {
         super();
         this.left = left;
         this.right = right;
+        computeSelected();
+    }
 
+    private void computeSelected() {
         lCandidate = computeLeftCandidate();
         rCandidate = computeRightCandidate();
 
         if (lCandidate != null && rCandidate != null) {
-            // if (TriangleUtils.inCircle(lCandidate.origin, left.origin, right.origin,
-            // rCandidate.origin)) {
-            // rCandidate = null;
-            // }
-            // else {
-            // lCandidate = null;
-            // }
+            // boolean circleCheck = TriangleUtils.inCircle(left.origin,
+            // right.origin, rCandidate.origin, lCandidate.origin);
+            boolean yCheck = TriangleUtils.yCompare(lCandidate.origin, rCandidate.origin) <= 0;
 
-            if (TriangleUtils.yCompare(lCandidate.origin, rCandidate.origin) <= 0) {
-                rCandidate = null;
-            }
-            else {
-                lCandidate = null;
-            }
+            selected = yCheck
+                ? lCandidate
+                : rCandidate;
+        }
+        else {
+            selected = lCandidate != null ? lCandidate : rCandidate;
         }
     }
 
@@ -52,11 +53,11 @@ class MergeLink {
     }
 
     Edge nextLeft() {
-        return lCandidate != null ? lCandidate : left;
+        return lCandidate == selected ? lCandidate : left;
     }
 
     Edge nextRight() {
-        return rCandidate != null ? rCandidate : right;
+        return rCandidate == selected ? rCandidate : right;
     }
 
     @Override
