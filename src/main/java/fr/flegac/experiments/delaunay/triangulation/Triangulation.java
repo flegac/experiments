@@ -17,13 +17,28 @@ public class Triangulation {
 
     public Triangulation(PointCloud points, int start, int end) {
         super();
-        bottom = leftBottom(EdgeFactory.triangle(points, start, end));
+        bottom = findBottom(EdgeFactory.triangle(points, start, end));
         edges.add(bottom);
         edges.add(bottom.inner);
         edges.add(bottom.inner.inner);
     }
 
-    Edge leftBottom(Edge edge) {
+    Edge findBottom(Edge edge) {
+        Vec l = edge.left.origin;
+        Vec r = edge.right.origin;
+        int comparison = TriangleUtils.yxCompare(l, r);
+        return comparison <= 0 ? _leftBottom(edge) : _rightBottom(edge);
+    }
+
+    Edge leftBottom() {
+        return _leftBottom(bottom);
+    }
+
+    Edge rightBottom() {
+        return _rightBottom(bottom);
+    }
+
+    Edge _leftBottom(Edge edge) {
         Edge left = edge.left;
 
         Vec a = edge.origin;
@@ -33,11 +48,11 @@ public class Triangulation {
             return edge;
         }
 
-        return leftBottom(left);
+        return _leftBottom(left);
 
     }
 
-    Edge rightBottom(Edge edge) {
+    Edge _rightBottom(Edge edge) {
         Edge right = edge.right;
 
         Vec a = edge.origin;
@@ -47,6 +62,6 @@ public class Triangulation {
             return edge;
         }
 
-        return rightBottom(right);
+        return _rightBottom(right);
     }
 }

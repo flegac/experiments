@@ -25,7 +25,7 @@ public class DelaunayViewer extends Application {
     @Override
     public void start(final Stage primaryStage) {
 
-        ArrayPointCloud points = new ArrayPointCloud(10);
+        ArrayPointCloud points = new ArrayPointCloud(13);
         Delaunay delaunay = new Delaunay(points);
         delaunay.triangulate();
 

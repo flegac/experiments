@@ -65,7 +65,7 @@ public class EdgeFactory {
         double x1 = p1.x() - p0.x();
         double y1 = p1.y() - p0.y();
 
-        double x2 = p2.x() - p1.x();
+        double x2 = p2.x() - p0.x();
         double y2 = p2.y() - p0.y();
 
         return x1 * y2 - x2 * y1 < 0;

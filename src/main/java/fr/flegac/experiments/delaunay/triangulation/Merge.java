@@ -29,8 +29,8 @@ public class Merge {
         this.right = right;
 
         // init
-        l = left.rightBottom(left.bottom);
-        r = right.leftBottom(right.bottom);
+        l = left.rightBottom();
+        r = right.leftBottom();
         if (l.origin.y() < r.origin.y()) {
             while (!TriangleUtils.goodTriangle(l.origin, r.origin, l.right.origin)) {
                 l = l.right;
@@ -45,16 +45,19 @@ public class Merge {
 
     public Triangulation merge() {
 
-        System.out.println(left.bottom.outerBox());
-        System.out.println(right.bottom.outerBox());
+        System.out.println("l = " + left.bottom.outerBox());
+        System.out.println("r = " + right.bottom.outerBox());
 
         computeLinks();
+
+        links.forEach(l -> System.out.print(l));
+        System.out.println();
 
         patchWithLinks();
 
         updateTriangulation();
 
-        // System.out.println(left.bottom.outerBox());
+        System.out.println("-> " + left.bottom.outerBox());
 
         return left;
     }
