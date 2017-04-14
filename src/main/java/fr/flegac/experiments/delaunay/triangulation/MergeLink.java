@@ -5,37 +5,58 @@ import fr.flegac.experiments.delaunay.edge.Edge;
 import fr.flegac.experiments.delaunay.edge.EdgeUtil;
 
 class MergeLink {
-    Edge left;
+    Edge left, right;
 
-    Edge right;
-
-    boolean leftSide;
+    Edge lCandidate, rCandidate;
 
     MergeLink(Edge left, Edge right) {
         super();
         this.left = left;
         this.right = right;
 
-        boolean lastL = EdgeUtil.isLast(left);
-        boolean lastR = EdgeUtil.isLast(right);
+        lCandidate = computeLeftCandidate();
+        rCandidate = computeRightCandidate();
 
-        boolean leftOk = !lastL && TriangleUtils.goodTriangle(left.origin, right.origin, left.right.origin);
-        boolean rightOk = !lastR && TriangleUtils.goodTriangle(left.origin, right.origin, right.left.origin);
-        if (leftOk && rightOk) {
-            leftSide = (TriangleUtils.yCompare(left.right.origin, right.left.origin) <= 0);
-        }
-        else {
-            leftSide = leftOk;
-        }
+        if (lCandidate != null && rCandidate != null) {
+            // if (TriangleUtils.inCircle(lCandidate.origin, left.origin, right.origin,
+            // rCandidate.origin)) {
+            // rCandidate = null;
+            // }
+            // else {
+            // lCandidate = null;
+            // }
 
+            if (TriangleUtils.yCompare(lCandidate.origin, rCandidate.origin) <= 0) {
+                rCandidate = null;
+            }
+            else {
+                lCandidate = null;
+            }
+        }
+    }
+
+    Edge computeRightCandidate() {
+        boolean checkLast = !EdgeUtil.isLast(right);
+        boolean checkTriangle = TriangleUtils.goodTriangle(left.origin, right.origin, right.left.origin);
+        boolean fullCheck = checkLast && checkTriangle;
+
+        return fullCheck ? right.left : null;
+    }
+
+    Edge computeLeftCandidate() {
+        boolean checkLast = !EdgeUtil.isLast(left);
+        boolean checkTriangle = TriangleUtils.goodTriangle(left.origin, right.origin, left.right.origin);
+        boolean fullCheck = checkLast && checkTriangle;
+
+        return fullCheck ? left.right : null;
     }
 
     Edge nextLeft() {
-        return leftSide ? left.right : left;
+        return lCandidate != null ? lCandidate : left;
     }
 
     Edge nextRight() {
-        return leftSide ? right : right.left;
+        return rCandidate != null ? rCandidate : right;
     }
 
     @Override

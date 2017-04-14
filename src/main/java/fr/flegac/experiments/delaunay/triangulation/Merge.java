@@ -75,9 +75,14 @@ public class Merge {
             }
 
             MergeLink link = new MergeLink(l, r);
+            if (link.lCandidate == null && link.rCandidate == null) {
+                break;
+            }
+
             links.add(link);
             l = link.nextLeft();
             r = link.nextRight();
+
         }
         while (true);
         links.add(new MergeLink(l, r));
