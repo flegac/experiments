@@ -23,6 +23,12 @@ public class EdgeFactory {
     }
 
     public static Edge triangle(Vec p0, Vec p1, Vec p2) {
+        if (needInversion(p0, p1, p2)) {
+            Vec tmp = p1;
+            p1 = p2;
+            p2 = tmp;
+        }
+
         Edge e0 = new Edge(p0);
         Edge e1 = new Edge(p1);
         Edge e2 = new Edge(p2);

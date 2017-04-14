@@ -9,7 +9,9 @@ public class EdgeUtil {
         Vec x = e.origin;
         Vec left = e.left.origin;
         Vec right = e.right.origin;
-        return TriangleUtils.yCompare(x, left) >= 0
-            && TriangleUtils.yCompare(x, right) >= 0;
+        int lCompare = TriangleUtils.yCompare(x, left);
+        int rCompare = TriangleUtils.yCompare(x, right);
+        return lCompare > 0
+            && rCompare > 0;
     }
 }

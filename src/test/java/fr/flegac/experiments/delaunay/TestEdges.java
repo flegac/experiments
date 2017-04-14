@@ -14,13 +14,13 @@ public class TestEdges {
         Edge t2 = EdgeFactory.triangle(points, 6, 9);
         Edge t3 = EdgeFactory.triangle(points, 9, 12);
 
-        t0.showOuterBox();
+        System.out.println(t0.outerBox());
         System.out.println("-----------");
-        t1.showOuterBox();
+        System.out.println(t1.outerBox());
         System.out.println("-----------");
-        t2.showOuterBox();
+        System.out.println(t2.outerBox());
         System.out.println("-----------");
-        t3.showOuterBox();
+        System.out.println(t3.outerBox());
         System.out.println("-----------");
 
     }

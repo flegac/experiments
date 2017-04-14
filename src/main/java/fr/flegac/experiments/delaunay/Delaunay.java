@@ -4,8 +4,9 @@ import java.util.Set;
 
 import fr.flegac.experiments.delaunay.edge.Edge;
 import fr.flegac.experiments.delaunay.point.PointCloud;
-import fr.flegac.experiments.delaunay.point.SortedPointCloud;
 import fr.flegac.experiments.delaunay.point.PointCloud.Vec;
+import fr.flegac.experiments.delaunay.point.SortedPointCloud;
+import fr.flegac.experiments.delaunay.triangulation.Merge;
 import fr.flegac.experiments.delaunay.triangulation.Triangulation;
 
 public class Delaunay {
@@ -42,7 +43,7 @@ public class Delaunay {
         int middle = start + (end - start) / 2;
         Triangulation left = triangulate(start, middle);
         Triangulation right = triangulate(middle, end);
-        return Triangulation.merge(left, right);
+        return new Merge(left, right).merge();
     }
 
 }

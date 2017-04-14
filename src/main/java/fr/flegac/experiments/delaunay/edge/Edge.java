@@ -15,18 +15,23 @@ public class Edge {
         this.origin = origin;
     }
 
-    public void showOuterBox() {
-        System.out.println(this);
-        Edge x = left;
-        while (x != this) {
-            System.out.println(x);
-            x = x.left;
+    public String outerBox() {
+
+        StringBuilder builder = new StringBuilder(origin.toString());
+
+        Edge x = this;
+        do {
+            x = x.right;
+            builder.append(" " + x.origin);
         }
+        while (x != this);
+
+        return builder.toString();
     }
 
     @Override
     public String toString() {
-        return String.format("(%s : %s %s)", origin, inner.origin, left.origin);
+        return String.format("(%s : %s %s)", origin, left.origin, right.origin);
     }
 
 }
