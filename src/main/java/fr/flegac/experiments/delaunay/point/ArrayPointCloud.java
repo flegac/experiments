@@ -5,19 +5,19 @@ import java.util.Random;
 public class ArrayPointCloud extends PointCloud {
     private static Random rand = new Random(54);
 
-    private float[] x;
+    private Float[] x;
 
-    private float[] y;
+    private Float[] y;
 
     public ArrayPointCloud(int size) {
-        this(new float[size], new float[size]);
+        this(new Float[size], new Float[size]);
         for (int i = 0; i < size; i++) {
             x[i] = rand.nextFloat();
             y[i] = rand.nextFloat();
         }
     }
 
-    public ArrayPointCloud(float[] x, float[] y) {
+    public ArrayPointCloud(Float[] x, Float[] y) {
         super();
         assert (x.length == y.length);
         this.x = x;

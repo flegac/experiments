@@ -44,16 +44,16 @@ public class Merge {
     }
 
     public Triangulation merge() {
-        System.out.println("l = " + left.bottom.outerBox());
-        System.out.println("r = " + right.bottom.outerBox());
+        // System.out.println("l = " + left.bottom.outerBox());
+        // System.out.println("r = " + right.bottom.outerBox());
 
         computeLinks();
         links.forEach(l -> System.out.print(l));
-        System.out.println();
+        // System.out.println();
 
         patchWithLinks();
         updateTriangulation();
-        System.out.println("-> " + left.bottom.outerBox());
+        // System.out.println("-> " + left.bottom.outerBox());
 
         return left;
     }

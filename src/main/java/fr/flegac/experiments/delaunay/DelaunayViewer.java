@@ -25,14 +25,21 @@ public class DelaunayViewer extends Application {
     @Override
     public void start(final Stage primaryStage) {
 
-        ArrayPointCloud points = new ArrayPointCloud(25);
+        Grid grid = new Grid();
+        grid.disc(.5f, .3f, .1f, 30);
+        grid.disc(.8f, 0, .1f, 30);
+        grid.disc(.6f, -.4f, .1f, 30);
+        grid.disc(.3f, .1f, .1f, 30);
+        grid.square(0, 0, .9f, 100);
+
+        ArrayPointCloud points = grid.cloud();
         Delaunay delaunay = new Delaunay(points);
         delaunay.triangulate();
 
         Group root = new Group();
 
-        root.setTranslateX(-150);
-        root.setTranslateY(-150);
+        root.setTranslateX(-250);
+        root.setTranslateY(-250);
 
         Group edges = new Group();
         edges.setScaleX(scale);
