@@ -9,6 +9,9 @@ import fr.flegac.experiments.delaunay.point.SortedPointCloud;
 import fr.flegac.experiments.delaunay.triangulation.Merge;
 import fr.flegac.experiments.delaunay.triangulation.Triangulation;
 
+/**
+ * http://www.geom.uiuc.edu/~samuelp/del_project.html
+ */
 public class Delaunay {
     private SortedPointCloud points;
 

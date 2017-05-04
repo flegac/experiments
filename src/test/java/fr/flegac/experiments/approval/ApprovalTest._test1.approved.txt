@@ -1,8 +1,0 @@
-[a, b, ] = Bidon [toto=ab, tata=b, titi=] 
-[, b, ] = Bidon [toto=b, tata=b, titi=] 
-[a, , ] = Bidon [toto=a, tata=, titi=] 
-[, , ] = Bidon [toto=, tata=, titi=] 
-[a, b, c] = Bidon [toto=a, tata=b, titi=c] 
-[, b, c] = Bidon [toto=, tata=b, titi=c] 
-[a, , c] = Bidon [toto=ca, tata=, titi=c] 
-[, , c] = Bidon [toto=c, tata=, titi=c] 

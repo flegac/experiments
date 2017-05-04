@@ -42,13 +42,13 @@
             <version>4.2</version>
         </dependency>
 
-        <dependency>
+   <!--      <dependency>
             <groupId>approval</groupId>
             <artifactId>approval-test</artifactId>
             <version>xxx</version>
             <scope>system</scope>
             <systemPath>${basedir}/libs/ApprovalTests.jar</systemPath>
-        </dependency>
+        </dependency> -->
         <dependency>
             <groupId>org.assertj</groupId>
             <artifactId>assertj-core</artifactId>
